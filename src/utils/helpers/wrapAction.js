@@ -1,6 +1,6 @@
 const wrapAction = action => async (req, res, next) => {
   try {
-    await action(req, res)
+    await action(req, res, next)
   } catch (error) {
     next(error)
   }
