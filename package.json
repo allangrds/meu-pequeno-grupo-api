@@ -11,7 +11,8 @@
     "test:e2e": "nyc --reporter=html --reporter=text mocha 'tests/e2e/**/*.js' --exit",
     "docs:generate": "aglio -i docs/api/index.apib --theme-template triple -o docs/build/output.html",
     "docs:preview": "aglio -i docs/api/index.apib --theme-template triple --server --port 3006",
-    "commit": "npx git-cz"
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -26,35 +27,25 @@
   "devDependencies": {
     "aglio": "2.3.0",
     "chai": "4.2.0",
-    "commitizen": "^4.1.2",
-    "cz-conventional-changelog": "^3.2.0",
     "eslint": "6.8.0",
     "eslint-config-pagarme-base": "3.0.0",
     "eslint-plugin-import": "2.20.2",
-    "faker": "^4.1.0",
+    "faker": "4.1.0",
     "mocha": "7.1.2",
     "nodemon": "2.0.3",
     "nyc": "15.0.1",
-    "sequelize-cli": "5.5.1",
-    "supertest": "^4.0.2"
+    "supertest": "4.0.2"
   },
   "dependencies": {
     "@hapi/joi": "17.1.1",
-    "bcryptjs": "2.4.3",
     "connect-timeout": "1.9.0",
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "express-rate-limit": "5.1.1",
     "helmet": "3.22.0",
-    "pg": "8.0.3",
-    "pg-hstore": "2.3.3",
     "ramda": "0.27.0",
-    "sequelize": "5.21.7",
-    "uuid": "7.0.3"
+    "uuid": "7.0.3",
+    "snyk": "^1.319.2"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  }
+  "snyk": true
 }
