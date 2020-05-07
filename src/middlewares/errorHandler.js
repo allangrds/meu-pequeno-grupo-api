@@ -6,6 +6,10 @@ const normalizeError = (err, req) => {
     return err
   }
 
+  console.log('Unhandled Error ---------------')
+  console.log(err)
+  console.log('Unhandled Error ---------------')
+
   return new InternalServerError(err, req)
 }
 

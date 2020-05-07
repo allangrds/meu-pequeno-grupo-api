@@ -38,7 +38,7 @@ app.use(errorHandler)
 app.use(haltOnTimedout)
 
 app.listen(port, () => (
-  console.log(`Example app listening on port ${port}!`) // eslint-disable-line no-console
+  console.log(`meu-pequeno-grupo-api app listening on port ${port}!`) // eslint-disable-line no-console
 ))
 
 module.exports = app

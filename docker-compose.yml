@@ -17,6 +17,7 @@ services:
 
   postgres:
     container_name: pg-postgres
+    hostname: ${POSTGRES_HOST}
     image: postgres:10
     restart: always
     env_file: .env
@@ -26,3 +27,34 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
+
+  test-unit:
+    build: .
+    command: npm run test:unit
+    volumes:
+      - .:/usr/app
+    tty: true
+
+  test-integration:
+    build: .
+    command: npm run test:integration
+    volumes:
+      - .:/usr/app
+    env_file: .env
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    tty: true
+
+  test-e2e:
+    build: .
+    command: npm run test:e2e
+    volumes:
+      - .:/usr/app
+    env_file: .env
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    tty: true
