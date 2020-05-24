@@ -1,7 +1,7 @@
 const usersRepository = require('../../repositories/users')
 
-const create = (values) => {
-  const payload = usersRepository.create(values)
+const create = (values, transaction) => {
+  const payload = usersRepository.create(values, transaction)
 
   return payload
 }
