@@ -7,7 +7,7 @@ kill:
 	@docker-compose kill
 
 up:
-	@docker-compose up
+	@docker-compose up api postgres
 
 migrate:
 	@docker exec -it pg-api npx sequelize db:migrate
