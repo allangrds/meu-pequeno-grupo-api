@@ -24,6 +24,7 @@ const getSchema = DataTypes => ({
   email_confirmed: {
     allowNull: false,
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   active: {
     allowNull: false,

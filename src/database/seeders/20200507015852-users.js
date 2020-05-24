@@ -1,7 +1,9 @@
 const bcrypt = require('bcryptjs')
+const uuidv4 = require('uuid/v4')
 
 module.exports = {
   up: queryInterface => queryInterface.bulkInsert('Users', [{
+    id: uuidv4(),
     name: 'John Doe',
     email: 'email@email.com',
     password: bcrypt.hashSync('123456', 10),
