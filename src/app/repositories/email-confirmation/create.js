@@ -6,7 +6,12 @@ const create = async (values, transaction) => {
     'token',
   ]
 
-  return baseRepository.create(EmailConfirmation, attributes, values, transaction)
+  return baseRepository.create(
+    EmailConfirmation,
+    attributes,
+    values,
+    transaction
+  )
 }
 
 module.exports = create

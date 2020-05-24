@@ -55,7 +55,6 @@ const create = async (req, res) => {
 
     throw err
   }
-
 }
 
 module.exports = create

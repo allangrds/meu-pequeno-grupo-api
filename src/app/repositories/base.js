@@ -1,4 +1,4 @@
-const create = async (model, attributes, values, transaction) => {
+const create = async (model, attributes, values, transaction) => { // eslint-disable-line max-params
   const result = await model.create(values, { transaction })
   const filteredResult = {}
 
