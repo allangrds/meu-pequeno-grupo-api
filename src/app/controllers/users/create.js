@@ -1,5 +1,9 @@
+const { omit } = require('ramda')
+
 const usersService = require('../../services/users')
+const emailConfirmationService = require('../../services/email-confirmation')
 const usersRepository = require('../../repositories/users')
+const db = require('../../models/index')
 
 const makeFakePayload = (name, email) => ({
   name,
@@ -14,6 +18,7 @@ const create = async (req, res) => {
     password,
     gender,
   } = req.body
+  let transaction
 
   const savedUser = await usersRepository.findOne({ email })
   const userExists = savedUser && savedUser.email
@@ -24,14 +29,32 @@ const create = async (req, res) => {
     return res.status(201).json(fakePayload)
   }
 
-  const payload = await usersService.create({
-    name,
-    email,
-    password,
-    gender,
-  })
+  try {
+    transaction = await db.sequelize.transaction()
 
-  return res.status(201).json(payload)
+    const payload = await usersService.create(
+      {
+        name,
+        email,
+        password,
+        gender,
+      },
+      transaction
+    )
+
+    await emailConfirmationService.sendEmail(
+      { id: payload.id, email, name },
+      transaction
+    )
+
+    await transaction.commit()
+
+    return res.status(201).json(omit(['id'], payload))
+  } catch (err) {
+    await transaction.rollback()
+
+    throw err
+  }
 }
 
 module.exports = create

@@ -37,7 +37,7 @@ services:
 
   test-integration:
     build: .
-    command: npm run test:integration
+    command: npx sequelize db:migrate && npm run test:integration
     volumes:
       - .:/usr/app
     env_file: .env
@@ -49,7 +49,7 @@ services:
 
   test-e2e:
     build: .
-    command: npm run test:e2e
+    command: npx sequelize db:migrate && npm run test:e2e
     volumes:
       - .:/usr/app
     env_file: .env

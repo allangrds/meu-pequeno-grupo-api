@@ -17,7 +17,7 @@ const port = process.env.API_PORT
 
 const limiter = rateLimit()
 
-app.use(timeout('3s'))
+app.use(timeout('8s'))
 app.set('trust proxy', 1)
 app.use(helmet())
 app.disable('x-powered-by')
