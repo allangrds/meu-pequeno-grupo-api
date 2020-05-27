@@ -3,14 +3,27 @@ const mailerService = require('../mailer/pages/users/create-account')
 const { url } = require('../../../environment')
 
 const sendEmail = async ({ id, email, name }, transaction) => {
-  const payload = await emailConfirmationRepostory.create(
-    { user_id: id },
-    transaction
-  )
+  const savedEmailConfirmation = await emailConfirmationRepostory.findOne({
+    user_id: id,
+  })
+
+  let payload
+
+  if (!savedEmailConfirmation || !savedEmailConfirmation.user_id) {
+    payload = await emailConfirmationRepostory.create(
+      { user_id: id },
+      transaction
+    )
+  } else {
+    payload = await emailConfirmationRepostory.update(
+      savedEmailConfirmation,
+      transaction
+    )
+  }
 
   await mailerService(email, {
     name,
-    c2a_link: `${url}users/email_confirmation/${payload.token}`,
+    c2a_link: `${url}users/email-confirmation/${payload.token}`,
   })
 }
 

@@ -20,10 +20,12 @@ const findOne = (model, attributes, where) => {
   return result
 }
 
-const update = (model, values, where) => {
-  const result = model.update({ ...values }, { where })
+const update = (model, values, where, transaction) => { // eslint-disable-line max-params
+  if (values && where) {
+    return model.update({ ...values }, { where, transaction })
+  }
 
-  return result
+  return model.update({}, { transaction })
 }
 
 module.exports = {

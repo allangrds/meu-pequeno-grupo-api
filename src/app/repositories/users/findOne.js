@@ -3,6 +3,7 @@ const baseRepository = require('../base')
 
 const findOne = (where, attributes) => {
   const defaultAttributes = [
+    'id',
     'name',
     'email',
     'created_at',

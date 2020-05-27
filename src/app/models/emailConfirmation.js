@@ -7,8 +7,9 @@ const configuration = {
 }
 
 const hooks = {
-  beforeUpdate: (user) => {
-    user.updated_at = new Date() // eslint-disable-line no-param-reassign
+  beforeUpdate: (emailConfirmation) => {
+    emailConfirmation.token = uuidv4() // eslint-disable-line no-param-reassign
+    emailConfirmation.updated_at = new Date() // eslint-disable-line no-param-reassign
   },
 }
 
