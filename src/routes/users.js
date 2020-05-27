@@ -4,6 +4,7 @@ const wrapAction = require('../utils/helpers/wrapAction')
 const {
   create: createController,
   activateAccount: activateAccountController,
+  sendConfirmationEmail: sendConfirmationEmailController,
 } = require('../app/controllers/users')
 const validator = require('../middlewares/validator')
 const { create: createSchema } = require('../middlewares/validator/schemas/users')
@@ -21,6 +22,11 @@ router.get(
   '/users/email-confirmation/:token',
   wrapAction(validateEmailConfirmationToken),
   wrapAction(activateAccountController)
+)
+
+router.post(
+  '/users/email-confirmation/',
+  wrapAction(sendConfirmationEmailController)
 )
 
 module.exports = router
