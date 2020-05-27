@@ -18,7 +18,7 @@ router.post(
 )
 
 router.get(
-  '/users/email_confirmation/:token',
+  '/users/email-confirmation/:token',
   wrapAction(validateEmailConfirmationToken),
   wrapAction(activateAccountController)
 )

@@ -10,7 +10,7 @@ const sendEmail = async ({ id, email, name }, transaction) => {
 
   await mailerService(email, {
     name,
-    c2a_link: `${url}users/email_confirmation/${payload.token}`,
+    c2a_link: `${url}users/email-confirmation/${payload.token}`,
   })
 }
 
