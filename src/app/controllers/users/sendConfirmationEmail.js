@@ -11,7 +11,10 @@ function randomNumber (min, max) {
 const sendConfirmationEmail = async (req, res) => {
   const { email } = req.body
 
-  const data = await usersService.findOne(email, false)
+  const data = await usersService.findOne({
+    email,
+    email_confirmed: false,
+  })
   const id = prop('id', data)
   const name = prop('name', data)
 

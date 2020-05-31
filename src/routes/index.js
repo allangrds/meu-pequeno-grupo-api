@@ -1,6 +1,7 @@
 const { Router } = require('express')
 
 const usersRouter = require('./users')
+const authRouter = require('./auth')
 
 const router = Router()
 
@@ -10,5 +11,6 @@ router.get(
 )
 
 router.use(usersRouter)
+router.use(authRouter)
 
 module.exports = router

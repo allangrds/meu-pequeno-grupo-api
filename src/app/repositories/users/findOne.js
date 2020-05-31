@@ -6,6 +6,7 @@ const findOne = (where, attributes) => {
     'id',
     'name',
     'email',
+    'password',
     'created_at',
   ]
   const selectedAttributes = attributes || defaultAttributes
