@@ -49,7 +49,7 @@ const create = async (req, res) => {
 
     await transaction.commit()
 
-    return res.status(201).json(omit(['id'], payload))
+    return res.status(201).json(omit(['id', 'password'], payload))
   } catch (err) {
     await transaction.rollback()
 

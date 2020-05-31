@@ -1,10 +1,7 @@
 const usersRepository = require('../../repositories/users')
 
-const findOne = (email, emailConfirmed) => {
-  const payload = usersRepository.findOne({
-    email,
-    email_confirmed: emailConfirmed,
-  })
+const findOne = (values) => {
+  const payload = usersRepository.findOne({ ...values })
 
   return payload
 }
