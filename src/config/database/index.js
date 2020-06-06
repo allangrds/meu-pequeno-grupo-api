@@ -10,6 +10,11 @@ const database = {
       useUTC: true,
     },
     timezone: '-03:00',
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000,
+    },
   },
 }
 
