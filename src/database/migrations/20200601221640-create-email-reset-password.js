@@ -26,12 +26,12 @@ const getSchema = DataTypes => ({
 module.exports = {
   up: (queryInterface, DataTypes) => (
     queryInterface.createTable(
-      'EmailConfirmation',
+      'EmailResetPassword',
       getSchema(DataTypes)
     )
   ),
 
   down: queryInterface => (
-    queryInterface.dropTable('EmailConfirmation')
+    queryInterface.dropTable('EmailResetPassword')
   ),
 }
