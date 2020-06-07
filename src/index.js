@@ -15,10 +15,13 @@ const haltOnTimedout = (req, res, next) => {
 
 const app = express()
 const port = process.env.API_PORT
+const sentryDns = process.env.NODE_ENV === 'development'
+  ? null
+  : process.env.SENTRY_DSN
 
 const limiter = rateLimit()
 
-Sentry.init({ dsn: process.env.SENTRY_DSN })
+Sentry.init({ dsn: sentryDns })
 
 app.use(Sentry.Handlers.requestHandler())
 app.use(Sentry.Handlers.errorHandler())
