@@ -27,6 +27,7 @@ const auth = async (req, res, next) => {
       throw new UnauthorizedError()
     }
 
+    req.user = {}
     req.user.id = decoded.id
 
     return next()

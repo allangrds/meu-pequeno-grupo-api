@@ -32,6 +32,14 @@ const getSchema = DataTypes => ({
     allowNull: true,
     type: DataTypes.STRING(11),
   },
+  user_admin_id: {
+    allowNull: false,
+    references: {
+      model: 'Users',
+      key: 'id',
+    },
+    type: DataTypes.UUID,
+  },
   active: {
     allowNull: false,
     type: DataTypes.BOOLEAN,
