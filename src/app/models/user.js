@@ -56,6 +56,22 @@ const getSchema = DataTypes => ({
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  small_group_id: {
+    allowNull: true,
+    references: {
+      model: 'SmallGroup',
+      key: 'id',
+    },
+    type: DataTypes.UUID,
+  },
+  small_group_admin_id: {
+    allowNull: true,
+    references: {
+      model: 'SmallGroup',
+      key: 'id',
+    },
+    type: DataTypes.UUID,
+  },
   created_at: {
     allowNull: false,
     type: DataTypes.DATE,
