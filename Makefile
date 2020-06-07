@@ -18,6 +18,9 @@ seed:
 bash-api:
 	@docker exec -it pg-api /bin/bash
 
+bash-database:
+	@docker exec -it pg-databaase bash
+
 test-unit:
 	@docker-compose up test-unit
 

@@ -7,7 +7,10 @@ const {
   sendConfirmationEmail: sendConfirmationEmailController,
 } = require('../app/controllers/users')
 const validator = require('../middlewares/validator')
-const { create: createSchema } = require('../middlewares/validator/schemas/users')
+const {
+  create: createSchema,
+  emailConfirmation: emailConfirmationSchema,
+} = require('../middlewares/validator/schemas/users')
 const validateEmailConfirmationToken = require('../middlewares/validateEmailConfirmationToken')
 
 const router = Router()
@@ -18,7 +21,7 @@ router.post(
   wrapAction(createController)
 )
 
-router.get(
+router.post(
   '/users/email-confirmation/:token',
   wrapAction(validateEmailConfirmationToken),
   wrapAction(activateAccountController)
@@ -26,6 +29,7 @@ router.get(
 
 router.post(
   '/users/email-confirmation/',
+  validator(emailConfirmationSchema),
   wrapAction(sendConfirmationEmailController)
 )
 
