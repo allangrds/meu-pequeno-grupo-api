@@ -1,16 +1,12 @@
-const bcrypt = require('bcryptjs')
 const uuidv4 = require('uuid/v4')
 
 const configuration = {
-  tableName: 'Users',
+  tableName: 'SmallGroups',
   timestamps: true,
   underscored: true,
 }
 
 const hooks = {
-  beforeCreate: (user) => {
-    user.password = bcrypt.hashSync(user.password, 10) // eslint-disable-line no-param-reassign
-  },
   beforeUpdate: (user) => {
     user.updated_at = new Date() // eslint-disable-line no-param-reassign
   },
@@ -28,41 +24,44 @@ const getSchema = DataTypes => ({
   },
   name: {
     allowNull: false,
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING(30),
   },
-  email: {
+  recurrent_period: {
     allowNull: false,
-    type: DataTypes.STRING(50),
-    unique: true,
-    validate: {
-      isEmail: true,
-    },
+    type: DataTypes.ENUM([
+      'daily',
+      'weekly',
+      'monthly',
+    ]),
   },
-  password: {
+  recurrent_value: {
     allowNull: false,
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(2),
   },
-  gender: {
-    allowNull: false,
-    type: DataTypes.ENUM('male', 'female'),
-  },
-  email_confirmed: {
+  description: {
     allowNull: true,
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+    type: DataTypes.STRING(255),
+  },
+  contact_email: {
+    allowNull: true,
+    type: DataTypes.STRING(45),
+  },
+  contact_phone: {
+    allowNull: true,
+    type: DataTypes.STRING(11),
+  },
+  user_admin_id: {
+    allowNull: false,
+    references: {
+      model: 'Users',
+      key: 'id',
+    },
+    type: DataTypes.UUID,
   },
   active: {
     allowNull: false,
     type: DataTypes.BOOLEAN,
     defaultValue: false,
-  },
-  small_group_id: {
-    allowNull: true,
-    references: {
-      model: 'SmallGroup',
-      key: 'id',
-    },
-    type: DataTypes.UUID,
   },
   created_at: {
     allowNull: false,
@@ -77,10 +76,10 @@ const getSchema = DataTypes => ({
 })
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', getSchema(DataTypes), {
+  const SmallGroup = sequelize.define('SmallGroup', getSchema(DataTypes), {
     hooks,
     ...configuration,
   })
 
-  return User
+  return SmallGroup
 }

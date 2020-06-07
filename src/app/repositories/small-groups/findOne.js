@@ -1,18 +1,13 @@
-const { User } = require('../../models')
+const { SmallGroup } = require('../../models')
 const baseRepository = require('../base')
 
 const findOne = (where, attributes) => {
   const defaultAttributes = [
-    'id',
-    'name',
-    'email',
-    'password',
-    'small_group_id',
-    'created_at',
+    'user_admin_id',
   ]
   const selectedAttributes = attributes || defaultAttributes
 
-  return baseRepository.findOne(User, selectedAttributes, where)
+  return baseRepository.findOne(SmallGroup, selectedAttributes, where)
 }
 
 module.exports = findOne
