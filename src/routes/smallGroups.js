@@ -4,6 +4,7 @@ const wrapAction = require('../utils/helpers/wrapAction')
 const {
   create: createController,
   update: updateController,
+  get: getController,
 } = require('../app/controllers/smallGroups')
 const authMiddleware = require('../middlewares/auth')
 
@@ -19,6 +20,12 @@ router.patch(
   '/small-groups/:id',
   wrapAction(authMiddleware),
   wrapAction(updateController)
+)
+
+router.get(
+  '/small-groups/:id',
+  wrapAction(authMiddleware),
+  wrapAction(getController)
 )
 
 module.exports = router
