@@ -7,6 +7,8 @@ const {
   get: getController,
   remove: removeController,
   getAll: getAllController,
+  affiliate: affiliateController,
+  exit: exitController,
 } = require('../app/controllers/smallGroups')
 const authMiddleware = require('../middlewares/auth')
 
@@ -40,6 +42,18 @@ router.get(
   '/small-groups',
   wrapAction(authMiddleware),
   wrapAction(getAllController)
+)
+
+router.post(
+  '/small-groups/membership',
+  wrapAction(authMiddleware),
+  wrapAction(affiliateController)
+)
+
+router.delete(
+  '/small-groups/membership',
+  wrapAction(authMiddleware),
+  wrapAction(exitController)
 )
 
 module.exports = router

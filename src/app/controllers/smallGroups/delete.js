@@ -15,11 +15,6 @@ const update = async (req, res) => {
     id,
     user_admin_id: req.user.id,
   })
-  const smallGroupExists = savedSmallGroup && savedSmallGroup.user_admin_id
-
-  if (!smallGroupExists) {
-    return res.status(404).json({})
-  }
 
   await smallGroupsRepository.update(
     {

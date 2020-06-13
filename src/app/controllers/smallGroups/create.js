@@ -30,16 +30,12 @@ const create = async (req, res) => {
   })
   const smallGroupExists = savedSmallGroup && savedSmallGroup.user_admin_id
 
-  if (smallGroupExists) {
+  if (smallGroupExists && savedSmallGroup.active === false) {
     const fakePayload = makeFakePayload(name)
 
     return res.status(201).json(fakePayload)
-  }
-
-  try {
-    transaction = await db.sequelize.transaction()
-
-    const payload = await smallGroupsService.create(
+  } if (smallGroupExists && savedSmallGroup.active === true) {
+    const payload = await smallGroupsService.update(
       {
         name,
         recurrent_period,
@@ -47,19 +43,24 @@ const create = async (req, res) => {
         description,
         contact_email,
         contact_phone,
-        user_admin_id: req.user.id,
       },
-      transaction
+      savedSmallGroup.id
     )
 
-    await transaction.commit()
-
     return res.status(201).json(payload)
-  } catch (err) {
-    await transaction.rollback()
-
-    throw err
   }
+
+  const payload = await smallGroupsService.create({
+    name,
+    recurrent_period,
+    recurrent_value,
+    description,
+    contact_email,
+    contact_phone,
+    user_admin_id: req.user.id,
+  })
+
+  return res.status(201).json(payload)
 }
 
 module.exports = create
