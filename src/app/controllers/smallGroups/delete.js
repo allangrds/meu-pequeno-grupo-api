@@ -23,7 +23,12 @@ const update = async (req, res) => {
 
   await smallGroupsRepository.update(
     {
-      active: false,
+      name,
+      recurrent_period,
+      recurrent_value,
+      description,
+      contact_email,
+      contact_phone,
     },
     savedSmallGroup.id
   )
