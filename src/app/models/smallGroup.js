@@ -61,7 +61,7 @@ const getSchema = DataTypes => ({
   active: {
     allowNull: false,
     type: DataTypes.BOOLEAN,
-    defaultValue: false,
+    defaultValue: true,
   },
   created_at: {
     allowNull: false,
