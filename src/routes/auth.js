@@ -6,7 +6,7 @@ const {
   authenticate: authenticateSchema,
   sendResetPassword: sendResetPasswordSchema,
   resetPassword: resetPasswordSchema,
-} = require('../middlewares/validator/schemas/users')
+} = require('../middlewares/validator/schemas/auth')
 const {
   authenticate: authenticateController,
   sendResetPassword: sendResetPasswordController,
